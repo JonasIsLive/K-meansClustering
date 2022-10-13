@@ -243,7 +243,7 @@ st.success(
 
 isFile = os.path.isfile(currentFolder)
 if isFile == False:
-    !mkdir {currentFolder}
+    os.mkdir(currentFolder)
 
 def clusteringFunc():
     for ix in range(starti,endi):
