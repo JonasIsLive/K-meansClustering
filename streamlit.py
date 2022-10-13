@@ -241,11 +241,11 @@ st.success(
 
 #import subprocess
 
-isFile = os.path.isfile(currentFolder)
-if isFile == False:
-    os.mkdir(currentFolder)
-
 def clusteringFunc():
+    isFile = os.path.isfile(currentFolder)
+    if isFile == False:
+        os.mkdir(currentFolder)
+        
     for ix in range(starti,endi):
 
         numberOfClusters = ix
