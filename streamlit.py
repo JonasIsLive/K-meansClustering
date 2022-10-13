@@ -78,7 +78,7 @@ with c30:
 
 #startCheck = False
 
-rootFolder = st.text_input("Path to Root Folder",value="/Graphs", placeholder="/Users/...").rstrip("/")
+rootFolder = st.text_input("Path to Root Folder",value="graphs", placeholder="/Users/...").rstrip("/")
 nameFolder = st.text_input("Name Cluster Files",value="Clusters", placeholder="Clusters...").rstrip("/")
 
 st.table(shows.head(5))
