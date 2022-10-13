@@ -685,7 +685,7 @@ def clusteringFunc():
 st.button(label="Run Clustering",on_click=clusteringFunc)
 
 import shutil
-myfile = shutil.make_archive("myfile", 'zip', "/Graphs")
+myfile = shutil.make_archive("myfile", 'zip', rootFolder)
 
 with open("myfile.zip", "rb") as fp:
     btn = st.download_button(
