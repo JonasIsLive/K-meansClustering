@@ -95,7 +95,7 @@ with c30:
 
 #startCheck = False
 
-rootFolder = st.text_input("Path to Root Folder",value="/Users/51019/Desktop/newGraphs", placeholder="/Users/...").rstrip("/")
+rootFolder = st.text_input("Path to Root Folder",value="/Graphs", placeholder="/Users/...").rstrip("/")
 nameFolder = st.text_input("Name Cluster Files",value="Clusters", placeholder="Clusters...").rstrip("/")
 
 st.table(shows.head(5))
@@ -241,12 +241,16 @@ st.success(
 
 #import subprocess
 
+isFile = os.path.isfile(currentFolder)
+if isFile == False:
+    !mkdir {currentFolder}
+
 def clusteringFunc():
     for ix in range(starti,endi):
 
         numberOfClusters = ix
         currentFolder = rootFolder+"/"+nameFolder+"_"+str(numberOfClusters)
-        currentFolder = nameFolder+"_"+str(numberOfClusters)
+        #currentFolder = rootFolder+nameFolder+"_"+str(numberOfClusters)
 
         #df = shows.copy()
 
@@ -681,7 +685,7 @@ def clusteringFunc():
 st.button(label="Run Clustering",on_click=clusteringFunc)
 
 import shutil
-myfile = shutil.make_archive("myfile", 'zip', "/")
+myfile = shutil.make_archive("myfile", 'zip', "/Graphs")
 
 with open("myfile.zip", "rb") as fp:
     btn = st.download_button(
