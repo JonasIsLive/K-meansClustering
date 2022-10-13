@@ -246,6 +246,7 @@ def clusteringFunc():
 
         numberOfClusters = ix
         currentFolder = rootFolder+"/"+nameFolder+"_"+str(numberOfClusters)
+        currentFolder = nameFolder+"_"+str(numberOfClusters)
 
         #df = shows.copy()
 
