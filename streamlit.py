@@ -4,43 +4,27 @@
 # In[1]:
 
 
-import streamlit as st
 #import relevant libraries
+import streamlit as st
 import matplotlib.pyplot as plt
 from kneed import KneeLocator
 from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 from sklearn.metrics import silhouette_score
 from sklearn.preprocessing import StandardScaler
-
 import tarfile
 import urllib
-
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
-
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.metrics import silhouette_score, adjusted_rand_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-
 from sklearn.preprocessing import OneHotEncoder
-
 import os
-
-###################################
-#from st_aggrid import AgGrid
-#from st_aggrid.grid_options_builder import GridOptionsBuilder
-#from st_aggrid.shared import JsCode
-
-###################################
-
-#from functionforDownloadButtons import download_button
-
-###################################
 
 
 def _max_width_():
@@ -59,7 +43,6 @@ def _max_width_():
 st.set_page_config(page_icon="📦", page_title="K-means Clustering")
 
 c20_, c30_, c31_ = st.columns([1, 1, 6])
-# st.image("https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/240/apple/285/balloon_1f388.png", width=100)
 with c30_: st.image(
     "https://community.powerbi.com/oxcrx34285/attachments/oxcrx34285/RVisuals/15/6/clustering.png",
     width=100,
@@ -252,36 +235,6 @@ def clusteringFunc():
         currentFolder = rootFolder+"/"+nameFolder+"_"+str(numberOfClusters)
         #currentFolder = rootFolder+nameFolder+"_"+str(numberOfClusters)
 
-        #df = shows.copy()
-
-        #save original data copy
-        #df_original = df.copy()
-
-        #df_len = df_original.shape[0]-1
-
-        #split relevant occurances to concat later
-#        for n,m in enumerate(colOverview['name']):
-#            globals()[m+"_"+str(colOverview['repeat'].iloc[n])] = df.iloc[:,colOverview['start'].iloc[n]:colOverview['end'].iloc[n]]
-
-#        for n,m in enumerate(colOverview['name'].unique()):
-#            for j in range(1,colOverview.loc[colOverview['name']==m,'repeat'].max()+1):
-#                globals()[m+"_"+str(colOverview['repeat'].iloc[j])].columns = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].columns
-#                globals()[m+"_"+str(colOverview['repeat'].iloc[0])] = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].append(globals()[m+"_"+str(colOverview['repeat'].iloc[j])])
-#            globals()[m+"_"+str(colOverview['repeat'].iloc[0])] = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].reset_index()
-
-#        df = pd.DataFrame({"tempDelCol":range(0,len(globals()[m+"_"+str(colOverview['repeat'].iloc[0])]))})
-#        for n,m in enumerate(colOverview['name'].unique()):
-#            df = df.merge(globals()[m+"_"+str(colOverview['repeat'].iloc[n])], left_index=True, right_index=True )
-
-#        df = df.drop(columns=["tempDelCol"])
-
-        #drop flagged columns
-#        df = df.drop(columns=[col for col in df if col.startswith('xQ')])
-#        df = df.drop(columns=[col for col in df if col.endswith('oe')])
-        #df = df.iloc[:,:27]
-
-#        df = df.drop(columns='Q9_1')
-
         #identify columns that need OneHotEncoding
         cols = pd.DataFrame({'col':df.dtypes.index,'type':df.dtypes.values})
         cols['type'].value_counts()
@@ -317,14 +270,6 @@ def clusteringFunc():
                 ("pca", PCA(n_components=2, random_state=42)),
             ]
         )
-
-        #init: You’ll use "k-means++" instead of "random" to ensure centroids are initialized
-        #with some distance between them. In most cases, this will be an improvement over "random".
-
-        #n_init: You’ll increase the number of initializations to ensure you find a stable solution.
-
-        #max_iter: You’ll increase the number of iterations per initialization to ensure that
-        #k-means will converge.
 
         clusterer = Pipeline(
            [
@@ -522,9 +467,6 @@ def clusteringFunc():
         q10 = pd.DataFrame(d.groupby(['predicted_cluster'])['Q10'].value_counts()
                           ).rename(columns={'Q10':'Q10_value_counts'}).reset_index(
                           ).rename(columns={'Q10':'Q10_WHERE'})
-        #q11 = pd.DataFrame(d.groupby(['predicted_cluster'])['Q11'].value_counts()
-        #                  ).rename(columns={'Q11':'Q11_value_counts'}).reset_index(
-        #                  ).rename(columns={'Q11':'Q11_WHO'})
 
         #Join Q11 response options
         q11_clusterCount = pd.DataFrame({"predicted_cluster":[],"Q11_value_counts":[]})
