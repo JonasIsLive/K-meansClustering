@@ -247,35 +247,35 @@ def clusteringFunc():
         numberOfClusters = ix
         currentFolder = rootFolder+"/"+nameFolder+"_"+str(numberOfClusters)
 
-        df = shows.copy()
+        #df = shows.copy()
 
         #save original data copy
-        df_original = df.copy()
+        #df_original = df.copy()
 
-        df_len = df_original.shape[0]-1
+        #df_len = df_original.shape[0]-1
 
         #split relevant occurances to concat later
-        for n,m in enumerate(colOverview['name']):
-            globals()[m+"_"+str(colOverview['repeat'].iloc[n])] = df.iloc[:,colOverview['start'].iloc[n]:colOverview['end'].iloc[n]]
+#        for n,m in enumerate(colOverview['name']):
+#            globals()[m+"_"+str(colOverview['repeat'].iloc[n])] = df.iloc[:,colOverview['start'].iloc[n]:colOverview['end'].iloc[n]]
 
-        for n,m in enumerate(colOverview['name'].unique()):
-            for j in range(1,colOverview.loc[colOverview['name']==m,'repeat'].max()+1):
-                globals()[m+"_"+str(colOverview['repeat'].iloc[j])].columns = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].columns
-                globals()[m+"_"+str(colOverview['repeat'].iloc[0])] = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].append(globals()[m+"_"+str(colOverview['repeat'].iloc[j])])
-            globals()[m+"_"+str(colOverview['repeat'].iloc[0])] = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].reset_index()
+#        for n,m in enumerate(colOverview['name'].unique()):
+#            for j in range(1,colOverview.loc[colOverview['name']==m,'repeat'].max()+1):
+#                globals()[m+"_"+str(colOverview['repeat'].iloc[j])].columns = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].columns
+#                globals()[m+"_"+str(colOverview['repeat'].iloc[0])] = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].append(globals()[m+"_"+str(colOverview['repeat'].iloc[j])])
+#            globals()[m+"_"+str(colOverview['repeat'].iloc[0])] = globals()[m+"_"+str(colOverview['repeat'].iloc[0])].reset_index()
 
-        df = pd.DataFrame({"tempDelCol":range(0,len(globals()[m+"_"+str(colOverview['repeat'].iloc[0])]))})
-        for n,m in enumerate(colOverview['name'].unique()):
-            df = df.merge(globals()[m+"_"+str(colOverview['repeat'].iloc[n])], left_index=True, right_index=True )
+#        df = pd.DataFrame({"tempDelCol":range(0,len(globals()[m+"_"+str(colOverview['repeat'].iloc[0])]))})
+#        for n,m in enumerate(colOverview['name'].unique()):
+#            df = df.merge(globals()[m+"_"+str(colOverview['repeat'].iloc[n])], left_index=True, right_index=True )
 
-        df = df.drop(columns=["tempDelCol"])
+#        df = df.drop(columns=["tempDelCol"])
 
         #drop flagged columns
-        df = df.drop(columns=[col for col in df if col.startswith('xQ')])
-        df = df.drop(columns=[col for col in df if col.endswith('oe')])
+#        df = df.drop(columns=[col for col in df if col.startswith('xQ')])
+#        df = df.drop(columns=[col for col in df if col.endswith('oe')])
         #df = df.iloc[:,:27]
 
-        df = df.drop(columns='Q9_1')
+#        df = df.drop(columns='Q9_1')
 
         #identify columns that need OneHotEncoding
         cols = pd.DataFrame({'col':df.dtypes.index,'type':df.dtypes.values})
