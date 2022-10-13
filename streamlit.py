@@ -242,9 +242,9 @@ st.success(
 #import subprocess
 
 def clusteringFunc():
-    isFile = os.path.isfile(currentFolder)
+    isFile = os.path.isfile(rootFolder)
     if isFile == False:
-        os.mkdir(currentFolder)
+        os.mkdir(rootFolder)
         
     for ix in range(starti,endi):
 
